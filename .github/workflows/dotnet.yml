@@ -22,15 +22,25 @@ jobs:
 
     - name: Build
       run: dotnet publish -o pub/
-    
-  
+
+    - name: Zip Release
+    # You may pin to the exact commit or the version.
+    # uses: TheDoctor0/zip-release@a1afcab9c664c9976ac398fa831eac67bed1eb0e
+      uses: TheDoctor0/zip-release@0.4.1
+      with:
+        # Filename for archive
+        filename: release.zip
+        # Base path for archive files
+        path: pub/
+        
+      
     - name: Upload a Build Artifact
       uses: actions/upload-artifact@v2.2.2
       with:
         # Artifact name
         name: # optional, default is artifact
         # A file, directory or wildcard pattern that describes what to upload
-        path: pub/*
+        path: release.zip
         # The desired behavior if no files are found using the provided path.
         # Duration after which artifact will expire in days. 0 means using default retention
         retention-days: 30 
